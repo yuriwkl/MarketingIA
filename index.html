@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketingIA — Seu marketing inteligente</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #131c30;
+      --text: #f5f7ff;
+      --muted: #aab5cc;
+      --accent: #a394ff;
+      --green: #65e6bd;
+      --border: #2b3753;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top right, #292052, transparent 45%), var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 28px 20px 50px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 55px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      color: #101329;
+      font-size: 25px;
+    }
+
+    .status {
+      color: var(--green);
+      border: 1px solid #315e55;
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+    }
+
+    .hero { max-width: 700px; margin-bottom: 30px; }
+
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 14px 0;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .intro {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(19, 28, 48, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      min-width: 0;
+    }
+
+    h2 { font-size: 19px; margin: 0 0 8px; }
+
+    .description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 16px 0 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #35415e;
+      background: #0c1426;
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+    }
+
+    textarea { min-height: 85px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 11px;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 21px;
+      background: linear-gradient(100deg, var(--accent), var(--green));
+      color: #101329;
+    }
+
+    .secondary {
+      background: #27324c;
+      border: 1px solid #3a4865;
+      color: white;
+    }
+
+    button:hover { filter: brightness(1.1); }
+
+    .output-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      color: var(--green);
+      background: #14382f;
+      padding: 6px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .empty {
+      padding: 38px 18px;
+      border: 1px dashed #3b4867;
+      border-radius: 14px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .empty .star { font-size: 36px; color: var(--accent); }
+
+    .post {
+      white-space: pre-wrap;
+      line-height: 1.7;
+      font-size: 14px;
+      padding: 15px;
+      background: #0c1426;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .post-heading { font-size: 14px; margin: 20px 0 9px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    .notice {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 18px;
+    }
+
+    footer {
+      text-align: center;
+      color: #8390aa;
+      font-size: 12px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 760px) {
+      .layout { grid-template-columns: 1fr; }
+      header { margin-bottom: 35px; }
+      .card { padding: 19px; }
+    }
+
+    @media (max-width: 430px) {
+      .row { grid-template-columns: 1fr; }
+      .status { display: none; }
+    }
+/* Melhorias dos cartões de publicações */
+#posts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+
+}
+
+#posts .post {
+  background: linear-gradient(145deg, #151f35, #0c1426);
+  border: 1px solid #35415e;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+#posts .post:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+#posts .post .post-heading,
+#posts .post h3 {
+  color: var(--accent);
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+#posts .post p {
+  margin: 0 0 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#posts .post button {
+  background: linear-gradient(100deg, var(--accent), var(--green));
+  color: #101329;
+}
+
+#posts .post button:hover {
+  filter: brightness(1.08);
+}
+
+@media (min-width: 1000px) {
+  #posts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">✦</div>
+        MarketingIA
+      </div>
+      <div class="status">PROTÓTIPO EM DESENVOLVIMENTO</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">Seu assistente de marketing</div>
+      <h1>Seu negócio merece<br><span>conteúdo melhor.</span></h1>
+      <p class="intro">
+        Crie ideias para redes sociais, legendas e promoções em poucos segundos.
+        Conte-nos sobre seu negócio para começar.
+      </p>
+    </section>
+
+    <main class="layout">
+      <section class="card">
+        <h2>Vamos conhecer seu negócio</h2>
+        <p class="description">Preencha os campos para preparar seu conteúdo.</p>
+
+        <form id="marketingForm">
+          <label for="business">Tipo de negócio</label>
+          <select id="business">
+            <option value="barbearia">Barbearia</option>
+            <option value="hamburgueria">Hamburgueria ou restaurante</option>
+            <option value="oficina">Oficina mecânica</option>
+            <option value="estetica">Salão ou estética</option>
+            <option value="loja">Loja de roupas</option>
+            <option value="outro">Outro negócio</option>
+          </select>
+
+          <div class="row">
+            <div>
+              <label for="platform">Rede social</label>
+              <select id="platform">
+                <option>Instagram</option>
+                <option>Facebook</option>
+                <option>WhatsApp</option>
+                <option>TikTok</option>
+              </select>
+            </div>
+            <div>
+              <label for="goal">Objetivo</label>
+              <select id="goal">
+                <option value="engajamento">Ganhar engajamento</option>
+                <option value="vendas">Conseguir vendas</option>
+                <option value="clientes">Atrair clientes</option>
+                <option value="promocao">Divulgar promoção</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="offer">Produto ou serviço</label>
+          <input id="offer" placeholder="Ex.: corte de cabelo e barba">
+
+          <label for="audience">Público-alvo</label>
+          <input id="audience" placeholder="Ex.: pessoas da minha cidade">
+
+          <label for="tone">Estilo do texto</label>
+          <select id="tone">
+            <option value="amigavel">Amigável</option>
+            <option value="profissional">Profissional</option>
+            <option value="divertido">Divertido</option>
+            <option value="direto">Direto e promocional</option>
+          </select>
+
+          <label for="details">Detalhes adicionais (opcional)</label>
+          <textarea id="details" placeholder="Diferenciais, bairro, horários ou outras informações..."></textarea>
+
+          <button class="primary" type="submit">✦ Gerar minhas ideias</button>
+        </form>
+
+        <p class="notice">
+          Versão de teste: os textos são gerados por modelos locais.
+          A conexão com uma IA real será adicionada na próxima etapa.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="output-title">
+          <div>
+            <h2>Seu conteúdo</h2>
+            <p class="description">Revise e personalize antes de publicar.</p>
+          </div>
+          <span class="tag">GERADOR</span>
+        </div>
+
+        <div id="empty" class="empty">
+          <div class="star">✧</div>
+          <strong>Suas próximas ideias começam aqui.</strong>
+          <br>Preencha o formulário e clique em “Gerar minhas ideias”.
+        </div>
+
+        <div id="results" hidden>
+          <div id="posts"></div>
+          <div class="actions">
+            <button id="copyButton" class="secondary" type="button">Copiar conteúdo</button>
+            <button id="newButton" class="secondary" type="button">Gerar novamente</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>MarketingIA · Uma ferramenta para ajudar pequenos negócios a criar conteúdo.</footer>
+  </div>
+
+  <script>
+    
+let lastPosts = [];
+
+async function generatePosts() {
+  const button = document.querySelector(
+    '#marketingForm button[type="submit"]'
+  );
+  const newButton = document.getElementById("newButton");
+
+  button.disabled = true;
+  newButton.disabled = true;
+  button.textContent = "Gerando com Gemini...";
+
+  try {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        business: document.getElementById("business").value,
+        platform: document.getElementById("platform").value,
+        goal: document.getElementById("goal").value,
+        product: document.getElementById("offer").value.trim(),
+        audience: document.getElementById("audience").value.trim(),
+        tone: document.getElementById("tone").value,
+        details: document.getElementById("details").value.trim()
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Erro ao gerar conteúdo.");
+    }
+
+    if (!data.result) {
+      throw new Error("A IA não retornou conteúdo.");
+    }
+
+    lastPosts = [data.result];
+
+    const posts = document.getElementById("posts");
+    posts.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.className = "post-heading";
+    heading.textContent = "CONTEÚDO GERADO PELO GEMINI";
+
+    
+let finalSections = [];
+
+try {
+  const parsed = JSON.parse(data.result);
+  if (Array.isArray(parsed.ideas) && parsed.ideas.length === 3) {
+    finalSections = parsed.ideas.map(idea =>
+      `${idea.title}\n\n${idea.caption}\n\nChamada para ação: ${idea.callToAction}\n\n${idea.hashtags}`
+    );
+  }
+} catch (error) {
+  // Se a resposta não for JSON, usa o texto original.
+}
+
+if (finalSections.length !== 3) {
+  const sections = data.result
+    .split(/(?=IDEIA\s*[123]\s*[:.-]?|PUBLICAÇÃO\s*[123]\s*[:.-]?|POST\s*[123]\s*[:.-]?)/i)
+    .map(section => section.trim())
+    .filter(Boolean);
+
+  finalSections = sections.length === 3 ? sections : [data.result];
+}
+
+lastPosts = finalSections;
+
+finalSections.forEach((section, index) => {
+  const card = document.createElement("div");
+  card.className = "post";
+
+  const title = document.createElement("h3");
+  title.className = "post-heading";
+  title.textContent = `IDEIA ${index + 1}`;
+
+  const content = document.createElement("p");
+  content.textContent = section;
+
+  const copy = document.createElement("button");
+  copy.textContent = "Copiar ideia";
+  copy.type = "button";
+
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(section);
+      copy.textContent = "Copiado!";
+      setTimeout(() => {
+        copy.textContent = "Copiar ideia";
+      }, 1500);
+    } catch {
+      alert("Não foi possível copiar automaticamente.");
+    }
+  });
+
+  card.append(title, content, copy);
+  posts.appendChild(card);
+});
+
+posts.prepend(heading);
+
+posts.prepend(heading);
+
+    document.getElementById("empty").hidden = true;
+    document.getElementById("results").hidden = false;
+
+  } catch (error) {
+    console.error("Erro:", error);
+    alert("Não foi possível gerar as ideias. Confira o terminal do VS Code.");
+  } finally {
+    button.disabled = false;
+    newButton.disabled = false;
+    button.textContent = "✦ Gerar minhas ideias";
+  }
+}
+
+document.getElementById("marketingForm").addEventListener("submit", event => {
+  event.preventDefault();
+  generatePosts();
+});
+
+document.getElementById("newButton").addEventListener("click", generatePosts);
+
+document.getElementById("copyButton").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(lastPosts.join("\n\n"));
+    const button = document.getElementById("copyButton");
+    button.textContent = "Copiado!";
+    setTimeout(() => {
+      button.textContent = "Copiar conteúdo";
+    }, 1500);
+  } catch {
+    alert("Não foi possível copiar automaticamente. Selecione e copie o texto.");
+  }
+});
+
+  </script>
+</body>
+</html>
